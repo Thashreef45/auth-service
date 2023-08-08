@@ -3,6 +3,8 @@ import * as protoLoader from '@grpc/proto-loader'
 import apexLogin from '../modules/apex/application/usecase/login';
 import nodalSignup from '../modules/nodal/application/usecase/create-nodal';
 import nodalLogin from '../modules/nodal/application/usecase/nodal-login';
+import cpLogin  from '../modules/channel-partner/application/usecase/login';
+import createCP from '../modules/channel-partner/application/usecase/createCP';
 
 const packageDef = protoLoader.loadSync("./src/grpc-config/auth.proto", {});
 const grpcObject = grpc.loadPackageDefinition(packageDef)
@@ -25,7 +27,9 @@ function grpcServer() {
 server.addService(authPackage.authService.service, {
     "apexLogin": apexLogin,
     "createNodal":nodalSignup,
-    "nodalLogin":nodalLogin
+    "nodalLogin":nodalLogin,
+    "cpLogin":cpLogin,
+    "createCP":createCP
 })
 
 

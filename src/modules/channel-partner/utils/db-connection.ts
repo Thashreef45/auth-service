@@ -1,7 +1,17 @@
-import {connect} from "mongoose";
+import mongoose, {connect,createConnection} from "mongoose";
+import env from 'dotenv'
+env.config()
 
 const connectDB = ()=>{
-    connect('').then(()=>{
-        console.log('auth-service--cp-db connected')
+    const connection = createConnection(String(process.env.CP_DB))
+    connection.on('connected',()=>{
+        console.log('auth-service--CP-db connected')
     })
+    connection.on('error', (err) => {
+        console.error('auth-service--CP-db connection failed');
+    });
+
+    return connection
 }
+
+export default connectDB

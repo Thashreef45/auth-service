@@ -1,8 +1,9 @@
 import repository from '../../infrastructure/repositories/repository'
 import { compare } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
+import {ApexLoginRequest,ApexLoginResponse} from '../interface/apex-types'
 
-const apexLogin = async (call: any, callback: any) => {
+const apexLogin = async (call:ApexLoginRequest, callback: (error:Error| null,response:ApexLoginResponse)=>void) => {
     try {
         const { id, password } = call.request
         const apex = await repository.ApexLogin(id, password)
@@ -16,7 +17,8 @@ const apexLogin = async (call: any, callback: any) => {
             callback(null, { message: 'Apex not found', status: 404 })
         }
     } catch (error) {
-        console.log(error)
+        console.error(error);
+        callback(error, { message: 'Internal Server Error', status: 500 });
     }
 }
 
