@@ -18,7 +18,7 @@ class Server{
 
     }
 
-    private initialiseMiddleware(){
+    private initialiseMiddleware():void{
         this.app.use(cors())
         this.app.use(helmet());
         this.app.use(nocache())
@@ -27,11 +27,11 @@ class Server{
         this.app.use(express.json());
     }
 
-    private initiliseGatewayListner(){
+    private initiliseGatewayListner():void{
         grpcServer()
     }
 
-    public start(port:string){
+    public start(port:string):void{
         this.app.listen(port,()=>console.log(`auth service running at ${port}`))
     }
 }

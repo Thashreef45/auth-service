@@ -12,7 +12,7 @@ const cpLogin = async (call: any, callback: any) => {
             if (await compare(password, cpExist.password)) {
                 callback(null, { message: "success", token: sign({ id: id, administration: "channelPartner" }, String(process.env.JWT_SIGNATURE), { expiresIn: '24h' }), status: 200 })
             } else {
-                callback(null, { message: "wrong password", status: 401 })
+                callback(null, { message: "Wrong password", status: 401 })
             }
         } else {
             callback(null, { message: "CP not exist", status: 404 })

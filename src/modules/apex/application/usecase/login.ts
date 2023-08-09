@@ -17,9 +17,10 @@ const apexLogin = async (call:ApexLoginRequest, callback: (error:Error| null,res
             callback(null, { message: 'Apex not found', status: 404 })
         }
     } catch (error) {
-        console.error(error);
-        callback(error, { message: 'Internal Server Error', status: 500 });
+        if(error instanceof Error){
+            callback(error, { message: 'Internal Server Error', status: 500 });
+        }
     }
 }
 
-export default apexLogin
+export default apexLogin 
