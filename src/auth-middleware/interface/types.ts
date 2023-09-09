@@ -11,5 +11,6 @@ export type CallbackFunction = (error: null | Error, response: CallbackResponse)
 interface CallbackResponse {
     message: string;
     status: number;
+    id?:string;
 }
 

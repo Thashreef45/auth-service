@@ -9,7 +9,7 @@ const authMiddleware = (administration: string) => {
                     const token: string = tokenSplit(String(call.request.token))
                     const decode: any = verifyToken(token, String(process.env.JWT_SIGNATURE))
                     if (decode.administration == administration) {
-                        callback(null, { message: 'Token verified successfully', status: 200 })
+                        callback(null, { message: 'Token verified successfully', status: 200,id:decode.id })
                     } else {
                         callback(null, { message: 'Access forbidden', status: 403 })
                     }
